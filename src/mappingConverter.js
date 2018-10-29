@@ -162,6 +162,10 @@ export function inputPropertiesToGraphQLTypes(
     throw new Error('You provide incorrect Elastic property config.');
   }
 
+  if (fieldName) {
+    fieldName = fieldName.replace(/-/g, '_')
+  }
+
   // mapping
   const { properties } = ((prop: any): ElasticMappingT);
   if (properties && isObject(properties)) {

@@ -197,7 +197,7 @@ export function prepareQueryInResolve(
 export function renameUndescoredToDots(obj: any, fieldMap: mixed) {
   const result = {};
   Object.keys(obj).forEach(o => {
-    result[o.replace(/__/g, '.')] = obj[o];
+    result[o.replace(/__/g, '.').replace(/_/g, '-')] = obj[o];
   });
   return result;
 }
