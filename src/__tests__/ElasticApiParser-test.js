@@ -377,6 +377,18 @@ describe('ElasticApiParser', () => {
         defaultValue: 'json',
       });
     });
+
+    it('should ignore non-numeric default for float', () => {
+      expect(
+        parser.paramToGraphQLArgConfig({ type: 'number', default: 'ABC' }, 'someField')
+      ).not.toHaveProperty('defaultValue');
+    });
+
+    it('should accept numeric default for float', () => {
+      expect(
+        parser.paramToGraphQLArgConfig({ type: 'number', default: '4.2' }, 'someField')
+      ).toHaveProperty('defaultValue', 4.2);
+    });
   });
 
   describe('settingsToArgMap()', () => {
